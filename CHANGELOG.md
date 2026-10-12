@@ -1,4 +1,2 @@
-## 0
-
-+ live spectral/granular surroundings processor
-+ MIDI In shaped
+## 1.0
+- Tilt/Warp/Dark/Bright/Lows/Harms, sessions, history machine, MIDI In
