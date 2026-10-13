@@ -103,7 +103,7 @@ The standalone app uses the selected processing sample rate. Device rate (automa
 ## History Machine and Record
 These controls are available in the standalone app. History Machine keeps the most recent processed output while audio runs. Set the buffer duration in Settings: 15, 30, 60, 120, or 300 seconds. The default is 60 seconds.
 
-History Machine starts a take with the available history and continues recording live audio. Record starts a take from the current moment. Press the active button or Record to finish, then save the stereo 24-bit WAV file. The history take can use up to twice the buffer memory. Changes to the sample rate and history duration are disabled during recording.
+History Machine starts a take with the available history and continues recording live audio. Record starts a take from the current moment. Press the active button or Record to finish, then save the stereo file. Choose the format in Settings: AAC at 256 kbps (the default) keeps takes small, about 1.9 MB per minute, and is saved as an M4A file at 44.1 or 48 kHz. FLAC is lossless 24-bit at the processing rate, about 40 to 65 percent of the uncompressed size depending on the sound. Settings shows the estimated size per minute. The history take can use up to twice the buffer memory. Changes to the sample rate, history duration, and recording format are disabled during recording.
 
 ## Sessions
 
