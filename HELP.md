@@ -1,9 +1,71 @@
+## HearSonic
 
-## The effect
+Turn live input into grains, tuned resonance, echoes, and octave shimmer. Use the microphone with headphones, or process instruments and recordings in an AUv3 host. The harmonic wall takes inspiration from the RjDj Eargasm scene.
 
-HearSonic is a reactive granular processor with band-selective spectral feedback for live audio, built primarily for outdoor headphone listening. It also works as an AUv3 effect on instruments and recordings in a host.
+## Start listening
 
-Captured input feeds overlapping grains, tuned resonance, frequency-shifted cross-feedback, stereo echoes, diffuse reverb, and octave-up shimmer. Initialy inspired by RjDj Eargasm scene has harmonic wall of four tuned feedback combs rings, excited towards Bright with Warp raised.
+Connect headphones, allow microphone access, and press Start listening.
+
+- Tilt: move left for slow, bass-heavy grains; right for harmonics and shimmer. Near the centre, Resonance adds tuned ringing.
+- Warp: move up for longer grains, time scatter, reversals, and spectral feedback.
+- Dark strip: set Low weight, the bass boost toward Dark.
+- Bright strip: set Harmonics, including the harmonic wall at any Tilt.
+
+Open a parameter group, then select a parameter to show its value, slider, and short description. Select it again to close the editor.
+
+Feedback can occur. Press Panic to stop it, or hold Bypass to hear dry input. With VoiceOver, activate Bypass to toggle it.
+
+## Signal flow
+
+Input trim feeds the dry path and parallel effect layers. Grains, resonance, harmonics, shimmer, Echo, and Space form the wet signal. The harmonic wall, Low weight, and Grit shape that signal before Dry / wet and Output gain.
+
+Memory sets grain lookback and effect decay. Environment mode adapts to input activity and limits output peaks. Signal mode accepts quiet input without output limiting. Bypass keeps processing active; input trim, output gain, and the Environment limiter still apply.
+
+Record and History Machine capture the final output.
+
+## Panic and Init
+
+Panic stops standalone audio, releases MIDI notes, and clears effect buffers. Press Start listening to resume. In a host, Panic clears the effect and releases bypass.
+
+Init resets sound controls and Output gain. It keeps Input mode, MIDI mapping, and saved sessions.
+
+## Audio settings
+
+Choose Device rate (automatic), 44,100, 48,000, or 96,000 Hz. Changing the rate restarts audio. An AUv3 host sets its own rate.
+
+New installations use Environment mode in the app and Signal mode in a host. MIDI notes default to Resonance pitch.
+
+## Recording
+
+Standalone only:
+
+- Record starts a new take now.
+- History Machine starts with buffered output, then records live audio.
+- Press the active button or Record to finish and save the stereo file.
+
+Choose the saved recording format in Settings. Estimated file size is shown per minute.
+
+- AAC (default): 256 kbps in an M4A file, about 1.9 MB per minute. Rates above 48 kHz convert to 44.1 or 48 kHz.
+- FLAC: lossless 24-bit at the processing rate. Estimated size is 40–65% of uncompressed audio; actual size varies with the sound.
+
+Set history length in Settings: 15, 30, 60, 120, or 300 seconds; default 60. Recording with history can use twice the buffer memory. Sample rate, history length, and recording format are locked during recording.
+
+## Sessions
+
+Press the session name to save, load, rename, or delete sessions and choose presets. The app restores your current session automatically. Saved sessions keep all settings; factory presets keep Output gain, Input mode, and MIDI mapping. An AUv3 host saves the session with its project.
+
+## MIDI
+
+Choose Notes control in Settings. The app uses connected MIDI sources; the plug-in receives MIDI from its host.
+
+- Resonance pitch: the latest note sets the chord root and keeps it after release.
+- Grain playback pitch: notes transpose captured audio relative to note 60 and Tilt playback speed.
+- Resonance + grain pitch: control both.
+- Resonance pitch + gate: tune and gate resonance and the harmonic wall.
+- Echo gate / Space gate: open the echo or reverb send while notes are held.
+- Fragments gate: stutter the latest captured audio.
+
+Velocity sets gated levels. Tails continue after release; sustain holds gates. Grain playback supports velocity, pitch bend, pressure, sustain, and MPE. CC 74 moves through captured audio.
 
 ## Current FX chain
 
@@ -73,50 +135,3 @@ The input splits into a dry path and several parallel paths, rough block scheme 
 | Audio output             |
 +--------------------------+
 ```
-
-In the standalone app, Record and History Machine take the final audio output.
-
-The controls set each layer's level and character. Memory sets how far grains look back and how long effect tails last. The output limiter applies only in Environment mode. Hear environment selects the dry path.
-
-## Listening and the sound field
-
-Connect headphones, allow microphone access, and press Start listening. Tilt runs horizontally from Dark through Neutral to Bright. Warp increases upward, from short fragments to longer grains and spectral feedback. The Dark and Bright strips set Low weight and Harmonics; the Bright strip also sets the harmonic wall.
-
-**Be advised that various combinations can lead to audio feedback. Please use with caution. Hit Panic or Bypass when it happens.**
-
-## Parameters
-- Sound Fields canvas to move the spehere around to change its Tilt/Warp/Dark/Bright position
-- Tap on parameter group to reveal each with its slider & value, tap again to close.
-- There is brief text desctiption for each when opened.
-
-
-## Panic and Init
-Panic stops the standalone audio engine, releases MIDI notes, and clears effect buffers. Press Start listening to restart. In an AUv3 host, Panic releases the bypass and clears the plug-in.
-
-New installations use Environment in the standalone app, Signal in a host, and Resonance pitch for Notes control.
-
-
-## Audio settings
-The standalone app uses the selected processing sample rate. Device rate (automatic) follows the output device. You can also select 44,100, 48,000, or 96,000 Hz. A rate change restarts the effect. The AUv3 plug-in uses the rate set by its host.
-
-
-## History Machine and Record
-These controls are available in the standalone app. History Machine keeps the most recent processed output while audio runs. Set the buffer duration in Settings: 15, 30, 60, 120, or 300 seconds. The default is 60 seconds.
-
-History Machine starts a take with the available history and continues recording live audio. Record starts a take from the current moment. Press the active button or Record to finish, then save the stereo file. Choose the format in Settings: AAC at 256 kbps (the default) keeps takes small, about 1.9 MB per minute, and is saved as an M4A file at 44.1 or 48 kHz. FLAC is lossless 24-bit at the processing rate, about 40 to 65 percent of the uncompressed size depending on the sound. Settings shows the estimated size per minute. The history take can use up to twice the buffer memory. Changes to the sample rate, history duration, and recording format are disabled during recording.
-
-## Sessions
-
-Press the session name to save, load, rename, or delete sessions and select factory presets.
-
-## MIDI In
-
-Notes control in Settings selects what MIDI notes do. The standalone app listens to connected MIDI sources; the AUv3 plug-in receives MIDI from its host.
-
-Resonance and the harmonic wall use the latest note as their chord root and retain it after release. Grain notes play captured input at semitone offsets from note 60, multiplied by the playback speed set by Tilt. Grain mode supports velocity, pitch bend, pressure, sustain, and MPE; CC 74 moves through captured audio.
-
-- **Resonance pitch + gate:** Notes tune and ring the resonance and harmonic wall.
-- **Echo gate / Space gate:** Notes open the echo or reverb send.
-- **Fragments gate:** Each note stutters the latest captured moment.
-
-Tails continue after release. Sustain holds the gate.
