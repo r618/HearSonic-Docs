@@ -19,7 +19,7 @@ Feedback can occur. Press Panic to stop it, or hold Bypass to hear dry input. Wi
 
 Input trim feeds the dry path and parallel effect layers. Grains, resonance, harmonics, shimmer, Echo, and Space form the wet signal. The harmonic wall, Low weight, and Grit shape that signal before Dry / wet and Output gain.
 
-Memory sets grain lookback and effect decay. Environment mode adapts to input activity and limits output peaks. Signal mode accepts quiet input without output limiting. Bypass keeps processing active; input trim, output gain, and the Environment limiter still apply.
+Memory sets grain lookback and effect decay. Environment mode adapts to input activity and limits output peaks. Signal mode accepts quiet input without output limiting. Bypass keeps processing active; Input trim, Output gain, and the Environment limiter still apply.
 
 Record and History Machine capture the final output.
 
@@ -59,7 +59,7 @@ Press the session name to save, load, rename, or delete sessions and choose pres
 Choose Notes control in Settings. The app uses connected MIDI sources; the plug-in receives MIDI from its host.
 
 - Resonance pitch: the latest note sets the chord root and keeps it after release.
-- Grain playback pitch: notes transpose captured audio relative to note 60 and Tilt playback speed.
+- Grain playback pitch: notes transpose captured audio relative to note 60, on top of Tilt playback speed.
 - Resonance + grain pitch: control both.
 - Resonance pitch + gate: tune and gate resonance and the harmonic wall.
 - Echo gate / Space gate: open the echo or reverb send while notes are held.
@@ -69,7 +69,7 @@ Velocity sets gated levels. Tails continue after release; sustain holds gates. G
 
 ## Current FX chain
 
-The input splits into a dry path and several parallel paths, rough block scheme for FX chain:
+The input splits into a dry path and parallel effect paths. Rough block diagram:
 
 ```text
 +--------------------------+
@@ -80,28 +80,39 @@ The input splits into a dry path and several parallel paths, rough block scheme 
              +------------------------------------------+
              |                                          |
              v                                          | Dry
-+--------------------------+                            |
-| PARALLEL SOUND LAYERS    |                            |
-|                          |                            |
-| Filtered live input      |                            |
-| Capture -> Grains        |                            |
-| Tonal halo               |                            |
-| Harmonics                |                            |
-| Resonance <---+          |                            |
-|     |         |          |                            |
-|     +---------+          |                            |
-| Shimmer   <---+          |                            |
-|     |         |          |                            |
-|     +---------+          |                            |
-+--------------------------+                            |
++------------------------------------------+            |
+| PARALLEL SOUND LAYERS                    |            |
+| (* = also sent to Echo / Space)          |            |
+|                                          |            |
+| Filtered live input *                    |            |
+| Tonal halo *                             |            |
+| Capture -> Grains * ----------+          |            |
+|                               |          |            |
+| Live gesture --+--------------+          |            |
+|                |              |          |            |
+|                +--> Harmonics |          |            |
+|                |        |     |          |            |
+|                |        +-----+          |            |
+|                |              v          |            |
+|                |         Resonance * <-+ |            |
+|                |             |         | |            |
+|                |             +---------+ |            |
+|                |                         |            |
+|                +--> Shimmer <---+        |            |
+|                        |        |        |            |
+|                        +--------+        |            |
++------------------------------------------+            |
              |                                          |
-             +----> +--------------------------+        |
-             |      | Echo      <---+          |        |
-             |      |     |         |          |        |
-             |      |     +---------+          |        |
-             |      | Space     <---+          |        |
-             |      |     |         |          |        |
-             |      |     +---------+          |        |
+             +-- * layers ---+                          |
+             |               v                          |
+             |      +--------------------------+        |
+             |      | Echo  <---+              |        |
+             |      |   |       |              |        |
+             |      |   +-------+              |        |
+             |      |   v                      |        |
+             |      | Space <---+              |        |
+             |      |   |       |              |        |
+             |      |   +-------+              |        |
              |      +--------------------------+        |
              |                   |                      |
              v                   |                      |
