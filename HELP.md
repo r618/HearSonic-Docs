@@ -15,6 +15,12 @@ Open a parameter group, then select a parameter to show its value, slider, and s
 
 Feedback can occur. Press Panic to stop it, or hold Bypass to hear dry input. With VoiceOver, please activate Bypass to toggle it.
 
+## Motion sensors
+
+Motion and Pin center buttons are enabled only on devices which support accelerometer/gyroscope sensors.
+Turn on Motion to move the ball with the device - balls rolls with gravity, displacement is relative to center which can be set using 'Pin center' button, long press to reset the center.
+Center is rest position when the device is horizontal.
+
 ## Signal flow
 
 Input trim feeds the dry path and parallel effect layers. Grains, resonance, harmonics, shimmer, Echo, and Space form the wet signal. The harmonic wall, Low weight, and Grit shape that signal before Dry / wet and Output gain.
