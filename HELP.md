@@ -13,7 +13,7 @@ Connect headphones, allow microphone access, and press Start listening.
 
 Open a parameter group, then select a parameter to show its value, slider, and short description. Select it again to close the editor.
 
-Feedback can occur. Press Panic to stop it, or hold Bypass to hear dry input. With VoiceOver, activate Bypass to toggle it.
+Feedback can occur. Press Panic to stop it, or hold Bypass to hear dry input. With VoiceOver, please activate Bypass to toggle it.
 
 ## Signal flow
 
